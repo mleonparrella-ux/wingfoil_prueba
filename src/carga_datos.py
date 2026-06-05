@@ -31,6 +31,7 @@ def verificar_columnas(df):
     columnas = [
         "Fecha",
         "Ubicación",
+        "Duración (min)",
         "Vel. Viento (kn)",
         "Dir. Viento",
         "Wing",

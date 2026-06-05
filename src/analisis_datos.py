@@ -34,3 +34,16 @@ def mostrar_metricas(df):
         "Ubicaciones distintas:",
         df["Ubicación"].nunique()
     )
+
+    print(
+        "Días navegados:",
+        df["Fecha"].nunique()
+    )
+
+    print(
+        "Duración promedio:",
+        round(
+            df["Duración (min)"].mean(), 
+            2
+        )
+    )

@@ -29,3 +29,29 @@ def validar_opcion(opcion):
     ]
 
     return opcion in opciones
+
+
+def validar_sensacion(sensacion):
+
+    try:
+
+        sensacion = int(sensacion)
+
+        return 1 <= sensacion <= 10
+
+    except:
+
+        return False
+
+
+def validar_duracion(duracion):
+
+    try:
+
+        duracion = float(duracion)
+
+        return duracion > 0
+
+    except:
+
+        return False

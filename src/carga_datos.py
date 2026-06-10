@@ -58,3 +58,33 @@ def limpiar_datos(df):
     df = df.dropna()
 
     return df
+
+def registrar_sesion(df, archivo_excel):
+    """
+    Registra una nueva sesión y la guarda en el dataset.
+    """
+
+    nueva_sesion = {
+        "Fecha": input("Fecha (AAAA-MM-DD): "),
+        "Ubicación": input("Ubicación: "),
+        "Duración (min)": int(input("Duración (min): ")),
+        "Vel. Viento (kn)": float(input("Velocidad del viento (kn): ")),
+        "Dir. Viento": input("Dirección del viento: "),
+        "Wing": input("Wing utilizada: "),
+        "Tabla": input("Tabla utilizada: "),
+        "Foil": float(input("Foil utilizado: ")),
+        "Sensación": int(input("Sensación (1-10): "))
+    }
+
+    # Agregar al DataFrame
+    df = pd.concat(
+        [df, pd.DataFrame([nueva_sesion])],
+        ignore_index=True
+    )
+
+    # Guardar cambios
+    df.to_excel(archivo_excel, index=False)
+
+    print("Sesión registrada correctamente.")
+
+    return df

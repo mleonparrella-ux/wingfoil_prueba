@@ -44,9 +44,8 @@ while True:
 
     print("\n===== DASHBOARD =====")
 
-    print("1 - Viento vs Sensación")
-    print("2 - Uso de Wings")
-    print("3 - Sensación por Wing")
+    print("1 - Uso de Wings")
+    print("2 - Sensación por Wing")
     print("0 - Salir")
 
     opcion = input(
@@ -55,13 +54,9 @@ while True:
 
     if opcion == "1":
 
-        grafico_viento_sensacion(df)
-
-    elif opcion == "2":
-
         grafico_wings(df)
 
-    elif opcion == "3":
+    elif opcion == "2":
 
         grafico_sensacion_promedio(df)
 

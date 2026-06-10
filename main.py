@@ -36,14 +36,19 @@ while True:
     elif opcion == "2":
 
         viento = input(
-            "Ingrese viento: "
+            "Ingrese intensidad del viento (en Knt): "
         )
-
+        ubicacion = input("Ingrese ubicacion: "
+        ) 
+        direccion = input("Ingrese direccion: "
+                          )
         if validar_viento(viento):
 
             recomendar_wing(
                 df,
-                float(viento)
+                ubicacion,
+                float(viento),
+                direccion
             )
 
         else:

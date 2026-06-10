@@ -6,7 +6,7 @@ Created on Fri Jun  5 12:20:23 2026
 """
 
 from src.carga_datos import cargar_dataset, limpiar_datos
-from src.visualizaciones import grafico_sensacion_promedio, grafico_viento_sensacion, grafico_wings
+from src.visualizaciones import grafico_sensacion_promedio, grafico_wings
 
 df = cargar_dataset()
 

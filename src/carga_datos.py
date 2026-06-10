@@ -7,13 +7,14 @@ Created on Fri Jun  5 12:12:40 2026
 
 import pandas as pd
 
+ARCHIVO = "dataset_sesiones.xlsx"
 
 def cargar_dataset():
 
     try:
 
         df = pd.read_excel(
-            "data/dataset_sesiones.xlsx"
+            ARCHIVO
         )
 
         return df
@@ -77,14 +78,10 @@ def registrar_sesion(df, archivo_excel):
     }
 
     # Agregar al DataFrame
-    df = pd.concat(
-        [df, pd.DataFrame([nueva_sesion])],
-        ignore_index=True
-    )
+    df.loc[len(df)] = nueva_sesion
 
-    # Guardar cambios
-    df.to_excel(archivo_excel, index=False)
+    df.to_excel(ARCHIVO, index=False)
 
-    print("Sesión registrada correctamente.")
+    print("Sesión guardada correctamente")
 
     return df

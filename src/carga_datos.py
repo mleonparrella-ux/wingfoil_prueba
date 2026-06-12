@@ -60,28 +60,26 @@ def limpiar_datos(df):
 
     return df
 
-def registrar_sesion(df, archivo_excel):
+
+def registrar_sesion(df_actual, datos_nuevos):
     """
-    Registra una nueva sesión y la guarda en el dataset.
+    Registra una nueva sesión sumándola al DataFrame actual y
+    guardando el resultado en el archivo de Excel de forma segura.
     """
-
-    nueva_sesion = {
-        "Fecha": input("Fecha (AAAA-MM-DD): "),
-        "Ubicación": input("Ubicación: "),
-        "Duración (min)": int(input("Duración (min): ")),
-        "Vel. Viento (kn)": float(input("Velocidad del viento (kn): ")),
-        "Dir. Viento": input("Dirección del viento: "),
-        "Wing": input("Wing utilizada: "),
-        "Tabla": input("Tabla utilizada: "),
-        "Foil": float(input("Foil utilizado: ")),
-        "Sensación": int(input("Sensación (1-10): "))
-    }
-
-    # Agregar al DataFrame
-    df.loc[len(df)] = nueva_sesion
-
-    df.to_excel(ARCHIVO, index=False)
-
-    print("Sesión guardada correctamente")
-
-    return df
+    ruta_excel = "datos/dataset_sesiones.xlsx"
+    
+    try:
+        # 1. Convertimos el diccionario con los datos en una fila de Pandas
+        nueva_fila = pd.DataFrame([datos_nuevos])
+        
+        # 2. Sumamos la nueva fila al historial usando concat (la forma limpia de Pandas)
+        df_actualizado = pd.concat([df_actual, nueva_fila], ignore_index=True)
+        
+        # 3. Guardamos el Excel actualizado sin índices duplicados
+        df_actualizado.to_excel(ruta_excel, index=False)
+        
+        return df_actualizado
+        
+    except Exception as e:
+        print(f"\n[Error al guardar]: No se pudo escribir en el archivo Excel. {e}")
+        return df_actual

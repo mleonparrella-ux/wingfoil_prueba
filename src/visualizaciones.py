@@ -7,31 +7,6 @@ Created on Fri Jun  5 12:12:44 2026
 
 import matplotlib.pyplot as plt
 
-
-def grafico_viento_sensacion(df):
-
-    plt.figure(figsize=(8,5))
-
-    plt.scatter(
-        df["Vel. Viento (kn)"],
-        df["Sensación"]
-    )
-
-    plt.title(
-        "Viento vs Sensación"
-    )
-
-    plt.xlabel(
-        "Velocidad del viento"
-    )
-
-    plt.ylabel(
-        "Sensación"
-    )
-
-    plt.show()
-
-
 def grafico_wings(df):
 
     datos = (

@@ -5,7 +5,7 @@ Created on Fri Jun  5 12:19:35 2026
 @author: usuario
 """
 
-from src.carga_datos import cargar_dataset, limpiar_datos
+from src.carga_datos import cargar_dataset, limpiar_datos, registrar_sesion
 from src.validaciones import validar_viento
 from src.analisis_datos import mostrar_metricas
 from src.recomendaciones import recomendar_wing
@@ -23,6 +23,7 @@ while True:
 
     print("1 - Ver métricas")
     print("2 - Recomendar Wing")
+    print("3 - Registrar sesión nueva")
     print("0 - Salir")
 
     opcion = input(
@@ -36,21 +37,34 @@ while True:
     elif opcion == "2":
 
         viento = input(
-            "Ingrese viento: "
+            "Ingrese intensidad del viento (en Knt): "
         )
-
+        ubicacion = input("Ingrese ubicacion: "
+        ) 
+        direccion = input("Ingrese direccion: "
+                          )
         if validar_viento(viento):
 
             recomendar_wing(
                 df,
-                float(viento)
+                ubicacion,
+                float(viento),
+                direccion
             )
-
+            
         else:
 
             print(
                 "Viento inválido"
-            )
+                )
+   
+    elif opcion == "3":
+        
+        df = registrar_sesion(
+       df,
+       "dataset_sesiones.xlsx"
+   )
+       
 
     elif opcion == "0":
 
@@ -63,3 +77,4 @@ while True:
         print(
             "Opción inválida"
         )
+        

@@ -23,7 +23,7 @@ def buscar_sesiones_similares(
                 - viento
             ) <= 3
         )
-        
+        ]
 
     return similares
 

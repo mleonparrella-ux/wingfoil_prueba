@@ -6,7 +6,7 @@ Created on Fri Jun  5 12:20:23 2026
 """
 
 from src.carga_datos import cargar_dataset, limpiar_datos
-from src.visualizaciones import grafico_sensacion_promedio, grafico_viento_sensacion, grafico_wings
+from src.visualizaciones import grafico_sensacion_promedio, grafico_wings
 
 df = cargar_dataset()
 
@@ -44,9 +44,8 @@ while True:
 
     print("\n===== DASHBOARD =====")
 
-    print("1 - Viento vs Sensación")
-    print("2 - Uso de Wings")
-    print("3 - Sensación por Wing")
+    print("1 - Uso de Wings")
+    print("2 - Sensación por Wing")
     print("0 - Salir")
 
     opcion = input(
@@ -55,13 +54,9 @@ while True:
 
     if opcion == "1":
 
-        grafico_viento_sensacion(df)
-
-    elif opcion == "2":
-
         grafico_wings(df)
 
-    elif opcion == "3":
+    elif opcion == "2":
 
         grafico_sensacion_promedio(df)
 

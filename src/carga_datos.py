@@ -7,13 +7,14 @@ Created on Fri Jun  5 12:12:40 2026
 
 import pandas as pd
 
+ARCHIVO = "dataset_sesiones.xlsx"
 
 def cargar_dataset():
 
     try:
 
         df = pd.read_excel(
-            "data/dataset_sesiones.xlsx"
+            ARCHIVO
         )
 
         return df
@@ -56,5 +57,31 @@ def verificar_columnas(df):
 def limpiar_datos(df):
 
     df = df.dropna()
+
+    return df
+
+def registrar_sesion(df, archivo_excel):
+    """
+    Registra una nueva sesión y la guarda en el dataset.
+    """
+
+    nueva_sesion = {
+        "Fecha": input("Fecha (AAAA-MM-DD): "),
+        "Ubicación": input("Ubicación: "),
+        "Duración (min)": int(input("Duración (min): ")),
+        "Vel. Viento (kn)": float(input("Velocidad del viento (kn): ")),
+        "Dir. Viento": input("Dirección del viento: "),
+        "Wing": input("Wing utilizada: "),
+        "Tabla": input("Tabla utilizada: "),
+        "Foil": float(input("Foil utilizado: ")),
+        "Sensación": int(input("Sensación (1-10): "))
+    }
+
+    # Agregar al DataFrame
+    df.loc[len(df)] = nueva_sesion
+
+    df.to_excel(ARCHIVO, index=False)
+
+    print("Sesión guardada correctamente")
 
     return df

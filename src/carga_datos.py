@@ -8,7 +8,7 @@ Created on Fri Jun  5 12:12:40 2026
 import pandas as pd
 
 # UNIFICADO: Ruta correcta para leer y escribir siempre en el mismo archivo
-ARCHIVO = "datos/dataset_sesiones.xlsx"
+ARCHIVO = "data/dataset_sesiones.xlsx"
 
 def cargar_dataset():
 

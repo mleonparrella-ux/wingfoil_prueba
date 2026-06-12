@@ -9,12 +9,13 @@ from src.validaciones import validar_viento
 from src.analisis_datos import mostrar_metricas
 from src.recomendaciones import recomendar_wing
 import src.appi_clima as appi_clima
+import sys 
 
 API_KEY = "TU_API_KEY"
 
 df = cargar_dataset()
 if df is None:
-    exit()
+    sys.exit() 
 
 df = limpiar_datos(df)
 

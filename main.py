@@ -8,10 +8,7 @@ from src.carga_datos import cargar_dataset, limpiar_datos, registrar_sesion
 from src.validaciones import validar_viento
 from src.analisis_datos import mostrar_metricas
 from src.recomendaciones import recomendar_wing
-import src.api_clima as api_clima
 import sys 
-
-API_KEY = "830c4fe781f2bcf133755085f9cdbf22" 
 
 df = cargar_dataset()
 if df is None:
@@ -23,7 +20,7 @@ while True:
     print("\n===== WINGFOIL =====")
     print("1 - Ver métricas")
     print("2 - Recomendar Wing")
-    print("3 - Registrar sesión nueva (Con API)")
+    print("3 - Registrar sesión nueva")
     print("0 - Salir")
 
     opcion = input("Seleccione una opción: ").strip()
@@ -43,38 +40,20 @@ while True:
    
     elif opcion == "3":
         print("\n=== REGISTRAR SESIÓN NUEVA ===")
-        ubicacion_input = input("¿Dónde navegaste hoy? (Ciudad): ").strip()
-        condicion_agua = input("Condición del agua (flat/chop moderado): ").strip()
+        ubicacion = input("Ingresa una ubicacion: ")
+        vel_viento = input("Ingresa la velocidad del viento en Knt: ")
+        dir_viento = input("Ingresa la direccion del viento: ")
+        wing = input("Ingresa el wing: ")
+        tabla = input("Ingresa la tabla: ")
+        foil = input("Ingresa el foil: ")
+        sensacion = input("Ingresa la sensacion: ")
         
-        viento_vel = None
-        viento_dir = None
-        
-        try:
-            print("Consultando clima en tiempo real...")
-            datos_json = api_clima.consultar_clima(ubicacion_input, API_KEY)
-            viento_vel, viento_dir = api_clima.procesar_datos_viento(datos_json)
-            print(f"-> Viento obtenido por API: {viento_vel} kn | Dirección: {viento_dir}°")
-        except Exception as e: 
-            print(e)
-            print("\n[Aviso]: Falló la API. Activando ingreso manual.")
-            viento_vel = input("Velocidad del viento manual (kn): ").strip()
-            while not validar_viento(viento_vel):
-                print("[Error]: Intensidad inválida.")
-                viento_vel = input("Ingrese una velocidad válida (kn): ").strip()
-            viento_vel = float(viento_vel)
-            viento_dir = int(input("Dirección del viento en grados (0-360): "))
-
-        print("\n--- Detalles del Equipamiento ---")
-        wing = input("Wing utilizada: ").strip()
-        tabla = input("Tabla utilizada: ").strip()
-        foil = input("Foil utilizado: ").strip()
-        sensacion = int(input("Sensación de la sesión (1-10): "))
+       
         
         nueva_sesion_dict = {
-            "Ubicación": ubicacion_input,
-            "Condición Agua": condicion_agua,
-            "Vel. Viento (kn)": viento_vel,
-            "Dirección Viento": viento_dir,
+            "Ubicación": ubicacion,
+            "Vel. Viento (kn)": vel_viento,
+            "Dirección Viento": dir_viento,
             "Wing": wing,
             "Tabla": tabla,
             "Foil": foil,

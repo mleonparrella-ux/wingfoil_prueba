@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jun  5 12:19:35 2026
-@author: usuario
-MAIN.PY - Interfaz de Lógica y Registro
-"""
+
 from src.carga_datos import cargar_dataset, limpiar_datos, registrar_sesion
 from src.validaciones import validar_viento
 from src.analisis_datos import mostrar_metricas

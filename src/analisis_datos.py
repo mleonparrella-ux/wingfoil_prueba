@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jun  5 12:12:42 2026
-
-@author: usuario
-"""
 
 def mostrar_metricas(df):
 
@@ -45,6 +39,24 @@ def mostrar_metricas(df):
         "Duración promedio:",
         round(
             df["Duración (min)"].mean(), 
+            2
+        )
+    )
+
+
+def mostrar_resumen(df):
+
+    print("\n===== RESUMEN =====")
+
+    print(
+        "Total de sesiones:",
+        len(df)
+    )
+
+    print(
+        "Sensación promedio:",
+        round(
+            df["Sensación"].mean(),
             2
         )
     )

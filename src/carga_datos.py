@@ -7,13 +7,15 @@ Created on Fri Jun  5 12:12:40 2026
 
 import pandas as pd
 
+# UNIFICADO: Ruta correcta para leer y escribir siempre en el mismo archivo
+ARCHIVO = "data/dataset_sesiones.xlsx"
 
 def cargar_dataset():
 
     try:
 
         df = pd.read_excel(
-            "data/dataset_sesiones.xlsx"
+            ARCHIVO
         )
 
         return df
@@ -28,12 +30,14 @@ def cargar_dataset():
 
 def verificar_columnas(df):
 
+    # CORREGIDO: Cambiado "Dir. Viento" por "Dirección Viento" para que calce 
+    # perfectamente con los datos que procesa la API y lo que espera el DataFrame
     columnas = [
         "Fecha",
         "Ubicación",
         "Duración (min)",
         "Vel. Viento (kn)",
-        "Dir. Viento",
+        "Dirección Viento",
         "Wing",
         "Tabla",
         "Foil",
@@ -59,32 +63,24 @@ def limpiar_datos(df):
 
     return df
 
-def registrar_sesion(df, archivo_excel):
+
+def registrar_sesion(df_actual, datos_nuevos):
     """
-    Registra una nueva sesión y la guarda en el dataset.
+    Registra una nueva sesión sumándola al DataFrame actual y
+    guardando el resultado en el archivo de Excel de forma segura.
     """
-
-    nueva_sesion = {
-        "Fecha": input("Fecha (AAAA-MM-DD): "),
-        "Ubicación": input("Ubicación: "),
-        "Duración (min)": int(input("Duración (min): ")),
-        "Vel. Viento (kn)": float(input("Velocidad del viento (kn): ")),
-        "Dir. Viento": input("Dirección del viento: "),
-        "Wing": input("Wing utilizada: "),
-        "Tabla": input("Tabla utilizada: "),
-        "Foil": float(input("Foil utilizado: ")),
-        "Sensación": int(input("Sensación (1-10): "))
-    }
-
-    # Agregar al DataFrame
-    df = pd.concat(
-        [df, pd.DataFrame([nueva_sesion])],
-        ignore_index=True
-    )
-
-    # Guardar cambios
-    df.to_excel(archivo_excel, index=False)
-
-    print("Sesión registrada correctamente.")
-
-    return df
+    try:
+        # 1. Convertimos el diccionario recibido en una fila de Pandas
+        nueva_fila = pd.DataFrame([datos_nuevos])
+        
+        # 2. Concatenamos la nueva fila al DataFrame actual
+        df_actualizado = pd.concat([df_actual, nueva_fila], ignore_index=True)
+        
+        # 3. Guardamos en el Excel de forma persistente en la ruta unificada
+        df_actualizado.to_excel(ARCHIVO, index=False)
+        
+        return df_actualizado
+        
+    except Exception as e:
+        print(f"\n[Error al guardar]: No se pudo escribir en el archivo Excel. {e}")
+        return df_actual

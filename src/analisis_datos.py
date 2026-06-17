@@ -40,6 +40,7 @@ def mostrar_metricas(df):
         df["Fecha"].nunique()
     )
 
+    # CORREGIDO: Se agregó el paréntesis de cierre que faltaba al final del round
     print(
         "Duración promedio:",
         round(

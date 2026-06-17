@@ -8,10 +8,10 @@ from src.carga_datos import cargar_dataset, limpiar_datos, registrar_sesion
 from src.validaciones import validar_viento
 from src.analisis_datos import mostrar_metricas
 from src.recomendaciones import recomendar_wing
-import src.appi_clima as appi_clima
+import src.api_clima as api_clima
 import sys 
 
-API_KEY = "TU_API_KEY"
+API_KEY = "830c4fe781f2bcf133755085f9cdbf22" 
 
 df = cargar_dataset()
 if df is None:
@@ -51,10 +51,11 @@ while True:
         
         try:
             print("Consultando clima en tiempo real...")
-            datos_json = appi_clima.consultar_clima(ubicacion_input, API_KEY)
-            viento_vel, viento_dir = appi_clima.procesar_datos_viento(datos_json)
+            datos_json = api_clima.consultar_clima(ubicacion_input, API_KEY)
+            viento_vel, viento_dir = api_clima.procesar_datos_viento(datos_json)
             print(f"-> Viento obtenido por API: {viento_vel} kn | Dirección: {viento_dir}°")
-        except Exception:
+        except Exception as e: 
+            print(e)
             print("\n[Aviso]: Falló la API. Activando ingreso manual.")
             viento_vel = input("Velocidad del viento manual (kn): ").strip()
             while not validar_viento(viento_vel):

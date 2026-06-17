@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
 """
-API_CLIMA.PY - Módulo Meteorológico Adaptado a Consigna de Cátedra
+Created on Fri Jun  5 12:12:45 2026
+
+@author: usuario
+API_CLIMA.PY - Módulo Meteorológico Adaptado a Consigna de Cátedra (Blindado)
 Este archivo NO maneja interacción con el usuario (no tiene print ni input).
 """
 import requests
@@ -27,6 +31,8 @@ def consultar_clima(ubicacion, api_key):
     }
     
     try:
+        # MEJORADO: Agregamos timeout=5 de forma segura junto a los params.
+        # Si la red se congela por 5 segundos, corta la petición y evita que Spyder se tilde.
         respuesta = requests.get(url, params=params, timeout=5)
     except requests.exceptions.RequestException:
         raise ConnectionError("No se pudo establecer conexión con el servidor de clima.")

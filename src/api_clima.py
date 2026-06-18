@@ -45,8 +45,8 @@ def consultar_clima(ubicacion, api_key):
     return respuesta.json()
 
 def grados_a_cardinal(grados):
-    """Convierte grados (0-360) a punto cardinal."""
-    puntos = ["N", "NE", "E", "SE", "S", "SO", "O", "NO"]
+    """Convierte grados (0-360) a punto cardinal en español."""
+    puntos = ["Norte", "Noreste", "Este", "Sudeste", "Sur", "Sudoeste", "Oeste", "Noroeste"]
     indice = round(grados / 45) % 8
     return puntos[indice]
 

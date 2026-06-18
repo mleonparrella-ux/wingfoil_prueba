@@ -8,47 +8,57 @@ Created on Fri Jun  5 12:12:44 2026
 import matplotlib.pyplot as plt
 
 def grafico_wings(df):
+    """
+    Muestra un gráfico de barras con la cantidad de usos de cada wing.
+    """
 
-    datos = (
-        df["Wing"]
-        .value_counts()
+    wings = df["Wing"].value_counts()
+
+    colores = [
+        "royalblue",
+        "orange",
+        "green",
+        "red",
+        "purple",
+        "gold",
+        "cyan"
+    ]
+
+    plt.figure(figsize=(8, 5))
+
+    wings.plot(
+        kind="bar",
+        color=colores[:len(wings)]
     )
 
-    plt.figure(figsize=(8,5))
+    plt.title("Cantidad de sesiones por Wing")
+    plt.xlabel("Wing")
+    plt.ylabel("Cantidad de sesiones")
+    plt.grid(axis="y", linestyle="--", alpha=0.5)
 
-    plt.bar(
-        datos.index,
-        datos.values
-    )
-
-    plt.title(
-        "Uso de Wings"
-    )
-
+    plt.tight_layout()
     plt.show()
+    
+def grafico_sensaciones(df):
+    """
+    Muestra la distribución de las sensaciones en un gráfico de torta.
+    """
 
-
-def grafico_sensacion_promedio(df):
-
-    datos = (
-        df.groupby("Wing")
-        ["Sensación"]
-        .mean()
+    sensaciones = (
+        df["Sensación"]
+        .value_counts()
+        .sort_index()
     )
 
-    plt.figure(figsize=(8,5))
+    plt.figure(figsize=(7, 7))
 
-    plt.bar(
-        datos.index,
-        datos.values
+    plt.pie(
+        sensaciones,
+        labels=sensaciones.index,
+        autopct="%1.1f%%",
+        startangle=90
     )
 
-    plt.title(
-        "Sensación promedio por Wing"
-    )
-
-    plt.ylabel(
-        "Sensación"
-    )
+    plt.title("Distribución de Sensaciones")
 
     plt.show()

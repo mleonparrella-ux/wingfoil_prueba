@@ -9,13 +9,11 @@ def buscar_sesiones_similares(
         df,
         ubicacion,
         viento,
-        direccion
+        sensacion
 ):
 
     similares = df[
         (df["Ubicación"] == ubicacion)
-        &
-        (df["Dir. Viento"] == direccion)
         &
         (
             abs(
@@ -23,7 +21,14 @@ def buscar_sesiones_similares(
                 - viento
             ) <= 3
         )
-        ]
+        &
+        (
+            abs(
+                df["Sensación"]
+                - sensacion
+            ) <= 1
+        )
+    ]
 
     return similares
 
@@ -32,38 +37,35 @@ def recomendar_wing(
         df,
         ubicacion,
         viento,
-        direccion
+        sensacion
 ):
 
     similares = buscar_sesiones_similares(
         df,
         ubicacion,
         viento,
-        direccion
+        sensacion
     )
 
     if len(similares) == 0:
 
         print(
-            "No hay sesiones similares."
+            "\nNo se encontraron sesiones similares."
         )
 
         return
-
-    if len(similares) < 3:
-
-        print(
-            f"Advertencia: solo se encontraron {len(similares)} sesiones similares."
-        )
 
     promedio_por_wing = (
         similares
         .groupby("Wing")["Sensación"]
         .mean()
+        .sort_values(
+            ascending=False
+        )
     )
 
     wing_recomendado = (
-        promedio_por_wing.idxmax()
+        promedio_por_wing.index[0]
     )
 
     print("\n===== RECOMENDACIÓN =====")
@@ -74,9 +76,9 @@ def recomendar_wing(
     )
 
     print(
-        "Sensación promedio esperada:",
+        "Sensación esperada:",
         round(
-            promedio_por_wing.max(),
+            promedio_por_wing.iloc[0],
             2
         )
     )
@@ -86,3 +88,5 @@ def recomendar_wing(
         len(similares),
         "sesiones similares"
     )
+
+    return wing_recomendado

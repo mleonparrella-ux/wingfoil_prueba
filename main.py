@@ -35,20 +35,24 @@ while True:
    
     elif opcion == "3":
         print("\n=== REGISTRAR SESIÓN NUEVA ===")
+        fecha = input("Ingresa una fecha (DD-MM-AAAA): ")
         ubicacion = input("Ingresa una ubicacion: ")
+        duracion = input("Ingresa la duracion en minutos: ")
         vel_viento = input("Ingresa la velocidad del viento en Knt: ")
         dir_viento = input("Ingresa la direccion del viento: ")
-        wing = input("Ingresa el wing: ")
-        tabla = input("Ingresa la tabla: ")
-        foil = input("Ingresa el foil: ")
+        wing = input("Ingresa el wing (en mm): ")
+        tabla = input("Ingresa la tabla (en mm): ")
+        foil = input("Ingresa el foil (en mm): ")
         sensacion = input("Ingresa la sensacion: ")
         
        
         
         nueva_sesion_dict = {
+            "Fecha": fecha,
             "Ubicación": ubicacion,
+            "Duración (min)": duracion,
             "Vel. Viento (kn)": vel_viento,
-            "Dirección Viento": dir_viento,
+            "Dir. Viento": dir_viento,
             "Wing": wing,
             "Tabla": tabla,
             "Foil": foil,

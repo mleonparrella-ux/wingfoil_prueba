@@ -29,15 +29,13 @@ def cargar_dataset():
 
 
 def verificar_columnas(df):
-
-    # CORREGIDO: Cambiado "Dir. Viento" por "Dirección Viento" para que calce 
-    # perfectamente con los datos que procesa la API y lo que espera el DataFrame
+    
     columnas = [
         "Fecha",
         "Ubicación",
         "Duración (min)",
         "Vel. Viento (kn)",
-        "Dirección Viento",
+        "Dir. Viento",
         "Wing",
         "Tabla",
         "Foil",

@@ -79,13 +79,13 @@ while True:
             nueva_sesion_dict = {
                 "Fecha": fecha,
                 "Ubicación": ubicacion_input,
-                "Duración (min)": duracion,
+                "Duración (min)": int(duracion),
                 "Vel. Viento (kn)": viento_vel,
                 "Dir. Viento": viento_dir,
                 "Wing": wing,
                 "Tabla": tabla,
                 "Foil": foil,
-                "Sensación": sensacion
+                "Sensación": int(sensacion)
             }
             df = registrar_sesion(df, nueva_sesion_dict)
             print("\n¡Sesión guardada de manera persistente!")

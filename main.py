@@ -3,7 +3,7 @@ from src.carga_datos import cargar_dataset, limpiar_datos, registrar_sesion
 from src.analisis_datos import mostrar_metricas
 from src.recomendaciones import recomendar_wing
 import src.api_clima as api_clima
-# %%
+
 import sys 
 
 

@@ -39,3 +39,16 @@ Deportistas de wingfoil de cualquier nivel que quieran llevar un registro de sus
 .Sensación entre 1 y 10
 .Duración positiva
 
+
+## Uso de IA
+Utilizamos Claude como herramienta de apoyo durante el desarrollo del proyecto. A continuación, los prompts más importantes:
+1. Generación del dataset
+
+"Creame un archivo Excel con más de 1000 sesiones de wing foil con columnas: Fecha, Ubicación, Duración (min), Vel. Viento (kn), Dir. Viento, Wing, Tabla, Foil y Sensación. Ubicaciones reales de Argentina, dirección del viento en español, viento entre 8 y 35 nudos, sensación entre 1 y 10."
+
+2. Función de registro de sesión
+"Tengo una función registrar_sesion en carga_datos.py que recibe un DataFrame y un diccionario con los datos de la nueva sesión. El problema es que cuando registro una sesión nueva se crea un Excel nuevo en vez de agregar al existente. ¿Qué está mal y cómo lo corrijo?"
+
+3. Corrección de errores
+"Tengo este error: TypeError: unsupported operand type(s) for -: 'str' and 'float' en recomendaciones.py al calcular la diferencia de viento. ¿Qué está pasando y cómo lo soluciono?"
+
